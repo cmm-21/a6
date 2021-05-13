@@ -23,3 +23,4 @@ Assignment writeup: http://crl.ethz.ch/teaching/computational-motion-21/slides/t
 ---
 
 - NOTE: Don't forget to switch to Release mode or Release With Debug Info otherwise it's gonna be just unimaginably slow.
+- NOTE: Tested builds: GCC 9.3 (Linux), Visual Studio 2019 (Windows), Clang 12.0.0 (Mac OS)
