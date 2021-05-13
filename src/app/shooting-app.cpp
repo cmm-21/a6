@@ -253,7 +253,11 @@ private:
 		// zoom*(-1. - eps, 1. + eps) -x-> (0, L)
 		// ""                         -y-> (L, 0)
 		xy /= ZOOM();
+		#if defined __APPLE__ 
+		Vector2f ret = (get_f_() * (xy + (1. + eps)*Vector2d(1, 1.5))).cast<float>();
+		#else
 		Vector2f ret = (get_f_() * (xy + (1. + eps)*Vector2d::Ones())).cast<float>();
+		#endif
 		ret.y() = get_L_() - ret.y();
 		return ret;
 	} 
