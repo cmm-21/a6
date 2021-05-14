@@ -18,7 +18,7 @@ Explanation of your approach to Question 10 (required for full credit):
 
 ---
 
-Assignment writeup: http://crl.ethz.ch/teaching/computational-motion-21/slides/tutorial-6.pdf
+Assignment writeup: http://crl.ethz.ch/teaching/computational-motion-21/slides/Tutorial-Write-Up-6.pdf
 
 ---
 
