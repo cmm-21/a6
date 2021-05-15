@@ -113,6 +113,10 @@ public:
 		resetPlot();
 		// --
 		resetSimulation();
+		
+		#if defined __APPLE__ 
+		glfwMaximizeWindow(window);
+		#endif				
     } 
 
 public: 
@@ -171,8 +175,15 @@ private:
     }
 
 	ImColor PLOT_COLOR = ImColor(249, 38, 114);
+	//
+	#if defined __APPLE__ 
+	Vector2d screen_offset = Vector2d(0.5, 1.1);
+	#else
+	Vector2d screen_offset = Vector2d::Ones();
+	#endif
     void drawImGui() override { using namespace ImGui; 
         Begin("NOTE: Press r to reset (optimization or simulation)."); 
+		InputScalarN("Screen offset", ImGuiDataType_Double, &screen_offset, 2);
         Checkbox("OPTIMIZE // Keyboard Shortcut: o", &OPTIMIZE);
         Checkbox("SIMULATE // Keyboard Shortcut: s",  &SIMULATE );
         Checkbox("SLOMO",     &SLOMO   ); 
@@ -213,9 +224,9 @@ private:
 		// ""                         -y-> (L, 0)
 		xy /= ZOOM();
 		#if defined __APPLE__ 
-		Vector2f ret = (get_f_() * (xy + (1. + eps)*Vector2d(1, 1.5))).cast<float>();
+		Vector2f ret = (get_f_() * (xy + (1. + eps)*screen_offset)).cast<float>();
 		#else
-		Vector2f ret = (get_f_() * (xy + (1. + eps)*Vector2d::Ones())).cast<float>();
+		Vector2f ret = (get_f_() * (xy + (1. + eps)*screen_offset)).cast<float>();
 		#endif
 		ret.y() = get_L_() - ret.y();
 		return ret;
@@ -226,7 +237,7 @@ private:
 		//                    "" <-y- (L, ))
 		uv.y() = get_L_() - uv.y();
 		double _1of = 1. / get_f_();
-		return ZOOM()*((_1of * uv) - (1. + eps) * Vector2d::Ones()); 
+		return ZOOM()*((_1of * uv) - (1. + eps) * screen_offset); 
 	}
 
 	void drawShip(const Vector2d &s_, const double &theta, const NVGcolor &COLOR) { Vector2d o = .02*Vector2d::Ones(); fillRect(s_ - o, s_ + o, COLOR); }
