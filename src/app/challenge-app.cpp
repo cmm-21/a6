@@ -215,7 +215,11 @@ private:
 	double eps = .25; // * otherwise stuff doesn't show up
 	double get_L_() { return double(std::min(height, width)); }
 	double get_f_() { return get_L_() / (2. + 2 * eps); }
+	#if defined __APPLE__ 
+	double ZOOM_ = .4f;
+	#else
 	double ZOOM_ = 1.f;
+	#endif		
 	double ZOOM_MIN_ = .1f;
 	double ZOOM_MAX_ = 2.f;
 	double ZOOM() { return 1. / ZOOM_; }
