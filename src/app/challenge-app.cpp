@@ -177,7 +177,7 @@ private:
 	ImColor PLOT_COLOR = ImColor(249, 38, 114);
 	//
 	#if defined __APPLE__ 
-	Vector2d screen_offset = Vector2d(0.5, 1.1);
+	Vector2d screen_offset = Vector2d(1, 1.5);
 	#else
 	Vector2d screen_offset = Vector2d::Ones();
 	#endif
